@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Herbogéniste Training</title>
+<meta name="description" content="Entraînement à Génie en herbe, hors ligne, par Josias Ezonga (NINJAXI)">
+<meta name="theme-color" content="#0e2623">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Herbogéniste">
+<style>
+:root{--bd:#0e2623;--bd2:#14352f;--ch:#f1efe4;--yl:#f2d45c;--bl:#8fd0f0;--pk:#f5a1ab;--dim:#9db8b0}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{min-height:100%}
+body{background:radial-gradient(900px 500px at 15% 0,#1b4a41 0,transparent 70%),var(--bd);color:var(--ch);font:17px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);overflow-x:hidden}
+.serif,h1,h2,.q{font-family:Palatino,"Palatino Linotype","Book Antiqua",Georgia,serif}
+#formulas{position:fixed;inset:0;pointer-events:none;z-index:0;font:italic 26px Georgia,serif;color:var(--ch);opacity:.07}
+#formulas span{position:absolute;white-space:nowrap}
+main{position:relative;z-index:1;max-width:720px;margin:auto;padding:16px 18px 48px}
+.pill{position:fixed;top:calc(8px + env(safe-area-inset-top));right:10px;z-index:5;font-size:12px;color:var(--dim);background:#0e2623cc;border:1px solid #2c5a50;border-radius:99px;padding:2px 10px}
+.pill.on{color:var(--yl)}
+h1{font-size:clamp(34px,9vw,54px);line-height:1.05;font-weight:700;margin-top:26px}
+h1 em{font-style:italic;color:var(--yl);display:block;font-size:.62em;font-weight:400;text-decoration:underline wavy var(--yl) 1.5px;text-underline-offset:8px;margin-top:6px}
+.lead{color:var(--dim);margin:18px 0 22px;max-width:46ch}
+.stats{display:flex;gap:22px;margin:0 0 22px;padding:12px 0;border-block:1px dashed #4b7d72}
+.stats div{flex:1}.stats b{display:block;font:700 28px Georgia,serif;color:var(--bl)}.stats span{font-size:13px;color:var(--dim)}
+.btn{display:block;width:100%;font:600 18px/1 inherit;font-family:inherit;padding:16px;border-radius:6px;border:2px solid var(--yl);background:var(--yl);color:#1b1a08;cursor:pointer;margin:10px 0;transition:transform .1s}
+.btn:active{transform:scale(.98)}.btn.o{background:transparent;color:var(--yl)}
+.btn.ok{background:var(--bl);border-color:var(--bl);color:#08202c}.btn.ko{background:transparent;border-color:var(--pk);color:var(--pk)}
+.btn.s{font-size:15px;padding:12px;display:inline-block;width:auto;margin:6px 8px 6px 0}
+button:focus-visible,textarea:focus-visible{outline:3px solid var(--bl);outline-offset:2px}
+h2{font-size:22px;font-weight:400;font-style:italic;color:var(--yl);margin:28px 0 6px}
+.toc{list-style:none;padding:0}
+.toc button{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:14px;width:100%;padding:13px 4px;border-bottom:1px dashed #3d6a5f;cursor:pointer;font:20px Palatino,Georgia,serif}
+.toc button:hover,.toc button:focus-visible{background:#ffffff0d}
+.toc i{font-style:normal;width:34px;text-align:center;font-size:24px}
+.toc b{flex:1;font-weight:400}.toc u{text-decoration:none;color:var(--dim);font:13px system-ui}
+.hint{font-size:14px;color:var(--dim);margin:12px 0}
+footer{margin-top:34px;padding-top:14px;border-top:1px dashed #4b7d72;font-size:14px;color:var(--dim);text-align:center}
+footer b{color:var(--ch)}
+.top{display:flex;justify-content:space-between;align-items:center;padding:34px 0 10px;color:var(--dim);font-size:15px}
+.link{all:unset;cursor:pointer;color:var(--bl);font-size:15px}.link:focus-visible{outline:3px solid var(--bl)}
+.bar{height:4px;background:#ffffff1a;border-radius:4px;overflow:hidden}.bar i{display:block;height:100%;width:100%;background:var(--yl)}
+.board{margin:20px 0 10px;padding:26px 20px;border:3px solid #5b4630;outline:1px solid #ffffff22;outline-offset:-9px;background:var(--bd2);border-radius:4px;min-height:230px}
+.q{font-size:clamp(23px,6vw,31px);line-height:1.35}
+.a{margin-top:22px;padding-top:16px;border-top:1px dashed var(--yl);font:700 clamp(22px,6vw,30px) Georgia,serif;color:var(--yl)}
+.row{display:flex;gap:10px}.row .btn{margin:6px 0}
+.big{font:700 64px Georgia,serif;color:var(--yl);line-height:1}
+textarea{width:100%;min-height:170px;background:var(--bd2);color:var(--ch);border:2px solid #4b7d72;border-radius:6px;padding:12px;font:15px/1.4 ui-monospace,Menlo,monospace}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div id="formulas" aria-hidden="true"><span style="top:9%;left:6%;transform:rotate(-8deg)">E = mc²</span><span style="top:24%;right:5%;transform:rotate(6deg)">a² + b² = c²</span><span style="top:46%;left:4%;transform:rotate(5deg)">∑ n = n(n+1)/2</span><span style="top:63%;right:8%;transform:rotate(-6deg)">π ≈ 3,14159</span><span style="top:82%;left:9%;transform:rotate(-4deg)">H₂O · CO₂ · Au</span><span style="top:92%;right:6%;transform:rotate(4deg)">√144 = 12</span></div>
+<div id="net" class="pill"></div>
+<main id="app"></main>
+<script>
+const LS={g(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}},s(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}};
+const $=s=>document.querySelector(s),app=$("#app");
+const ri=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),pick=a=>a[ri(0,a.length-1)];
+const esc=s=>String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const P=t=>t.trim().split("\n").map(l=>l.split("|").map(s=>s.trim()));
+const R=[["rdc","Culture régionale RDC","🇨🇩"],["sci","Sciences","🔬"],["cg","Culture générale","🌍"],["cap","Pays & capitales","🏛️"],["geo","Géographie","🧭"],["his","Histoire","📜"],["mat","Mathématiques","∑"],["fra","Français","✒️"],["dev","Devinettes","🧩"],["spo","Sports","🏅"],["mus","Musique","🎼"],["myt","Mythologies","⚡"]];
+const RN=Object.fromEntries(R.map(r=>[r[0],r[1]]));
+
+/* ===== Banque de questions (question | réponse) ===== */
+const fmt=n=>n.toLocaleString("fr"),f1=x=>fmt(Math.round(x*10)/10);
+const B={
+rdc:P(`Quel grand fleuve traverse la RDC ?|Le fleuve Congo
+Quelle est la capitale de la RDC ?|Kinshasa
+Quelle est la date de l’indépendance de la RDC ?|Le 30 juin 1960
+Quelle est la monnaie de la RDC ?|Le franc congolais
+Cite les quatre langues nationales de la RDC.|Kikongo, lingala, swahili et tshiluba
+Qui fut le premier Premier ministre de la RDC indépendante ?|Patrice Emery Lumumba
+Qui fut le premier président de la RDC indépendante ?|Joseph Kasa-Vubu
+Quel animal rare, cousin de la girafe, est l’emblème de la RDC ?|L’okapi
+Quel est le nom de l’hymne national de la RDC ?|Debout Congolais
+Quelle est la devise de la RDC ?|Justice – Paix – Travail
+Quel nom portait la RDC de 1971 à 1997 ?|Le Zaïre
+Quel parc national abrite des gorilles de montagne et des volcans actifs ?|Le parc des Virunga
+Quel grand barrage hydroélectrique se trouve sur le fleuve Congo, près de Matadi ?|Inga
+Quel est le plus haut sommet de la RDC ?|Le pic Margherita (monts Rwenzori)
+Combien de provinces compte la RDC ?|26
+Quelle est la superficie approximative de la RDC ?|Environ 2,3 millions de km²
+Combien de pays voisins la RDC a-t-elle ?|Neuf
+Quelle capitale africaine fait face à Kinshasa, de l’autre côté du fleuve ?|Brazzaville
+Quelle est la longueur approximative du fleuve Congo ?|Environ 4 700 km
+Quel est le rang du fleuve Congo en Afrique par sa longueur ?|Deuxième, après le Nil
+Quelle ville de RDC est traversée par l’équateur ?|Mbandaka
+Quelles villes de RDC bordent le lac Kivu ?|Goma et Bukavu
+Quel lac portait le nom de Léopold II ?|Le lac Mai-Ndombe
+Quelles chutes se trouvent près de Kisangani ?|Les chutes Boyoma (anciennement Stanley)
+Quel volcan domine la ville de Goma ?|Le Nyiragongo
+Quel grand singe ne vit à l’état sauvage qu’en RDC ?|Le bonobo
+Combien de sites naturels de la RDC sont inscrits au patrimoine mondial de l’UNESCO ?|Cinq
+Quel parc national, créé en 1925, est le plus ancien d’Afrique ?|Virunga
+Quel minerai stratégique pour les batteries la RDC produit-elle le plus au monde ?|Le cobalt
+Quelle ville est la capitale du diamant en RDC ?|Mbuji-Mayi
+Quel médecin congolais a reçu le prix Nobel de la paix en 2018 ?|Denis Mukwege
+Dans quelle ville se trouve l’hôpital de Panzi ?|Bukavu
+Qui a dirigé le pays de 1965 à 1997 ?|Mobutu Sese Seko
+Qui a pris le pouvoir en 1997 après Mobutu ?|Laurent-Désiré Kabila
+Qui est devenu président en 2001, après l’assassinat de son père ?|Joseph Kabila
+Qui est devenu président de la RDC en janvier 2019 ?|Félix Tshisekedi
+Quand Patrice Lumumba a-t-il été assassiné ?|Le 17 janvier 1961
+Quel roi des Belges a possédé le Congo à titre personnel ?|Léopold II
+Comment s’appelait le Congo sous Léopold II ?|L’État indépendant du Congo
+Quelle conférence de 1884-1885 a organisé le partage de l’Afrique ?|La conférence de Berlin
+Quelle est la couleur de fond du drapeau de la RDC ?|Le bleu ciel
+Quel est l’indicatif téléphonique de la RDC ?|+243
+Quel est le domaine internet de la RDC ?|.cd
+Quel est le surnom de l’équipe nationale de football de la RDC ?|Les Léopards
+Quel club de Lubumbashi a remporté la Ligue des champions africaine ?|Le TP Mazembe
+Quel pays fut le premier d’Afrique noire à disputer une Coupe du monde, en 1974 ?|Le Zaïre (RDC)
+Dans quel stade a eu lieu le combat Ali – Foreman ?|Le stade du 20 Mai (aujourd’hui stade des Martyrs)
+Quel plat est fait de feuilles de manioc pilées ?|Le pondu
+Comment appelle-t-on la pâte de manioc fermentée emballée dans des feuilles ?|La chikwangue
+Quelle sauce à l’huile de palme accompagne souvent le poulet ?|La moambe
+Quel mouvement d’élégance vestimentaire est né à Kinshasa et Brazzaville ?|La SAPE
+Quel chanteur a fondé le groupe Viva la Musica ?|Papa Wemba
+Quel groupe était dirigé par Tabu Ley Rochereau ?|African Fiesta
+Quel ancien royaume est célèbre pour ses étoffes de raphia, le « velours Kuba » ?|Le royaume Kuba
+Quelle langue nationale est la plus parlée à Kinshasa ?|Le lingala
+Quel est le principal port maritime de la RDC ?|Matadi
+Quel chemin de fer, inauguré en 1898, relie Matadi à Kinshasa ?|Le chemin de fer Matadi – Kinshasa`),
+sci:P(`Quel est le symbole chimique de l’eau ?|H₂O
+Quelle planète est la plus proche du Soleil ?|Mercure
+Quel gaz les plantes absorbent-elles pour la photosynthèse ?|Le dioxyde de carbone (CO₂)
+Combien d’os compte le squelette d’un adulte ?|206
+Quel organe pompe le sang dans le corps ?|Le cœur
+Quelle est la vitesse de la lumière, environ ?|300 000 km/s
+Quelle planète est surnommée « la planète rouge » ?|Mars
+Qui a formulé la théorie de la relativité ?|Albert Einstein
+Quel est le plus grand organe du corps humain ?|La peau
+Quel gaz représente environ 78 % de l’air ?|L’azote
+Quelle est l’unité de force dans le Système international ?|Le newton
+Quelle particule porte une charge négative ?|L’électron
+Qui a découvert la pénicilline ?|Alexander Fleming
+Quelle est la formule du sel de table ?|NaCl
+Quel est le pH de l’eau pure à 25 °C ?|7
+Quelle est l’unité de la fréquence ?|Le hertz
+Quelle est l’unité de la puissance ?|Le watt
+Quelle est l’unité de l’énergie ?|Le joule
+Quelle est l’unité de la résistance électrique ?|L’ohm
+Quelle est l’unité de la pression ?|Le pascal
+Quel organe filtre le sang et produit l’urine ?|Le rein
+Combien de chromosomes compte une cellule humaine ?|46
+Quelle molécule porte l’information génétique ?|L’ADN
+Quelle partie de la cellule contient l’ADN ?|Le noyau
+Quel pigment vert permet la photosynthèse ?|La chlorophylle
+Quel est le plus grand os du corps humain ?|Le fémur
+Combien de dents compte un adulte ?|32
+Quelle est la plus grande planète du système solaire ?|Jupiter
+Quelle planète est célèbre pour ses anneaux ?|Saturne
+Qui a énoncé la loi de la gravitation universelle ?|Isaac Newton
+Qui a publié le tableau périodique des éléments en 1869 ?|Dmitri Mendeleïev
+À quelle température l’eau gèle-t-elle (pression normale) ?|0 °C
+Quelle est la formule de la loi d’Ohm ?|U = R × I
+Qui a mis au point le vaccin contre la rage en 1885 ?|Louis Pasteur
+Qui a découvert la radioactivité naturelle en 1896 ?|Henri Becquerel
+Quelle scientifique a reçu deux prix Nobel, en physique et en chimie ?|Marie Curie`)};
+
+/* Générateurs RDC */
+const PROV=`Kongo-Central:Matadi;Kwango:Kenge;Kwilu:Bandundu;Mai-Ndombe:Inongo;Kasaï:Tshikapa;Kasaï-Central:Kananga;Kasaï-Oriental:Mbuji-Mayi;Lomami:Kabinda;Sankuru:Lodja;Maniema:Kindu;Sud-Kivu:Bukavu;Nord-Kivu:Goma;Ituri:Bunia;Haut-Uélé:Isiro;Bas-Uélé:Buta;Tshopo:Kisangani;Nord-Ubangi:Gbadolite;Mongala:Lisala;Sud-Ubangi:Gemena;Équateur:Mbandaka;Tshuapa:Boende;Tanganyika:Kalemie;Haut-Lomami:Kamina;Lualaba:Kolwezi;Haut-Katanga:Lubumbashi`.split(";").map(s=>s.split(":"));
+const OLD=`Kinshasa:Léopoldville;Lubumbashi:Élisabethville;Kisangani:Stanleyville;Mbandaka:Coquilhatville;Bukavu:Costermansville;Kananga:Luluabourg;Kalemie:Albertville;Likasi:Jadotville;Mbuji-Mayi:Bakwanga;Bandundu:Banningville`.split(";").map(s=>s.split(":"));
+
+/* Générateurs sciences */
+const EL=`H Hydrogène;He Hélium;Li Lithium;Be Béryllium;B Bore;C Carbone;N Azote;O Oxygène;F Fluor;Ne Néon;Na Sodium;Mg Magnésium;Al Aluminium;Si Silicium;P Phosphore;S Soufre;Cl Chlore;Ar Argon;K Potassium;Ca Calcium;Sc Scandium;Ti Titane;V Vanadium;Cr Chrome;Mn Manganèse;Fe Fer;Co Cobalt;Ni Nickel;Cu Cuivre;Zn Zinc;Ga Gallium;Ge Germanium;As Arsenic;Se Sélénium;Br Brome;Kr Krypton;Rb Rubidium;Sr Strontium;Y Yttrium;Zr Zirconium;Nb Niobium;Mo Molybdène;Tc Technétium;Ru Ruthénium;Rh Rhodium;Pd Palladium;Ag Argent;Cd Cadmium;In Indium;Sn Étain;Sb Antimoine;Te Tellure;I Iode;Xe Xénon;Cs Césium;Ba Baryum;La Lanthane;Ce Cérium;Pr Praséodyme;Nd Néodyme;Pm Prométhium;Sm Samarium;Eu Europium;Gd Gadolinium;Tb Terbium;Dy Dysprosium;Ho Holmium;Er Erbium;Tm Thulium;Yb Ytterbium;Lu Lutécium;Hf Hafnium;Ta Tantale;W Tungstène;Re Rhénium;Os Osmium;Ir Iridium;Pt Platine;Au Or;Hg Mercure;Tl Thallium;Pb Plomb;Bi Bismuth;Po Polonium;At Astate;Rn Radon;Fr Francium;Ra Radium;Ac Actinium;Th Thorium;Pa Protactinium;U Uranium;Np Neptunium;Pu Plutonium;Am Américium;Cm Curium;Bk Berkélium;Cf Californium;Es Einsteinium;Fm Fermium;Md Mendélévium;No Nobélium;Lr Lawrencium;Rf Rutherfordium;Db Dubnium;Sg Seaborgium;Bh Bohrium;Hs Hassium;Mt Meitnérium;Ds Darmstadtium;Rg Roentgenium;Cn Copernicium;Nh Nihonium;Fl Flérovium;Mc Moscovium;Lv Livermorium;Ts Tennesse;Og Oganesson`.split(";").map(s=>s.split(" "));
+const PL=["Mercure","Vénus","la Terre","Mars","Jupiter","Saturne","Uranus","Neptune"];
+const COMP=`H₂O:18;CO₂:44;CH₄:16;NH₃:17;NaCl:58.5;NaOH:40;H₂SO₄:98;HNO₃:63;CaCO₃:100;O₂:32;N₂:28;H₂:2;O₃:48;CO:28;C₆H₁₂O₆:180;C₂H₆O:46;KOH:56;MgO:40;CaO:56;HCl:36.5;Ca(OH)₂:74;SO₂:64;NO₂:46;H₂O₂:34;CH₃COOH:60;CaCl₂:111;Fe₂O₃:160;KCl:74.5`.split(";").map(s=>s.split(":"));
+const DON="(H 1 ; C 12 ; N 14 ; O 16 ; Na 23 ; Mg 24 ; S 32 ; Cl 35,5 ; K 39 ; Ca 40 ; Fe 56)";
+const CV=[["km","m",1000],["kg","g",1000],["L","mL",1000],["h","min",60],["min","s",60]];
+const vt=()=>[ri(10,120),ri(2,12)],ri2=()=>[ri(2,100),ri(1,12)];
+/* [nombre de questions distinctes possibles, générateur] */
+const T=[
+[1221,()=>{const[v,t]=vt();return[`Un mobile roule à ${v} km/h pendant ${t} h. Quelle distance parcourt-il ?`,`${v*t} km`]}],
+[1221,()=>{const[v,t]=vt();return[`Un cycliste parcourt ${v*t} km en ${t} h. Quelle est sa vitesse moyenne ?`,`${v} km/h`]}],
+[1221,()=>{const[v,t]=vt();return[`Un train roule à ${v} km/h. Combien de temps met-il pour parcourir ${v*t} km ?`,`${t} h`]}],
+[1188,()=>{const[r,i]=ri2();return[`Un conducteur ohmique de ${r} Ω est traversé par un courant de ${i} A. Quelle est la tension à ses bornes ?`,`${r*i} V`]}],
+[1188,()=>{const[r,i]=ri2();return[`Une tension de ${r*i} V est appliquée à un conducteur de ${r} Ω. Quelle est l’intensité du courant ?`,`${i} A`]}],
+[1188,()=>{const[r,i]=ri2();return[`Un dipôle soumis à ${r*i} V est traversé par ${i} A. Quelle est sa résistance ?`,`${r} Ω`]}],
+[90,()=>{const u=pick([6,9,12,24,110,220]),i=ri(1,15);return[`Un appareil alimenté sous ${u} V absorbe ${i} A. Quelle est sa puissance ?`,`${u*i} W`]}],
+[400,()=>{const m=ri(1,200),[a,g]=pick([["la Terre",10],["la Lune",1.6]]);return[`Sur ${a}, où g = ${f1(g)} N/kg, quel est le poids d’une masse de ${m} kg ?`,`${f1(m*g)} N`]}],
+[980,()=>{const p=ri(1,20),v=ri(2,50);return[`Un objet de ${p*v} g occupe ${v} cm³. Quelle est sa masse volumique, en g/cm³ ?`,`${p} g/cm³`]}],
+[1950,()=>{const p=ri(1,50),s=ri(2,40);return[`Une force de ${p*s} N s’exerce sur une surface de ${s} m². Quelle est la pression, en pascals ?`,`${p} Pa`]}],
+[4990,()=>{const[a,b,k]=pick(CV),n=ri(2,999);return[`${n} ${a} = ? ${b}`,`${fmt(n*k)} ${b}`]}],
+[COMP.length,()=>{const[f]=pick(COMP),m=COMP.find(c=>c[0]==f)[1];return[`Quelle est la masse molaire de ${f}, en g/mol ? ${DON}`,f1(+m)]}],
+[COMP.length*9,()=>{const[f,m]=pick(COMP),k=ri(2,10);return[`Quelle masse, en grammes, représentent ${k} mol de ${f} ? ${DON}`,`${f1(k*m)} g`]}],
+[EL.length,()=>{const[s,n]=pick(EL);return[`Quel est le symbole chimique de l’élément « ${n} » ?`,s]}],
+[EL.length,()=>{const[s]=pick(EL);return[`Quel élément a pour symbole chimique « ${s} » ?`,EL.find(e=>e[0]==s)[1]]}],
+[EL.length,()=>{const z=ri(1,118);return[`Quel est le nom de l’élément de numéro atomique ${z} ?`,EL[z-1][1]]}],
+[EL.length,()=>{const z=ri(1,118);return[`Quel est le numéro atomique de l’élément « ${EL[z-1][1]} » ?`,String(z)]}],
+[8,()=>{const i=ri(0,7);return[`Quelle planète est la n° ${i+1} à partir du Soleil ?`,PL[i]]}],
+[8,()=>{const i=ri(0,7);return[`Quelle est la position de ${PL[i]} à partir du Soleil ?`,`${i+1}${i?"e":"re"}`]}]];
+const G={
+rdc(){const k=ri(0,3),[a,b]=pick(k<2?PROV:OLD);
+ return[[`${a} : quel est le chef-lieu de cette province ?`,b],[`${b} est le chef-lieu de quelle province ?`,a],[`Quel est l’ancien nom de ${a} ?`,b],[`${b} est l’ancien nom de quelle ville ?`,a]][k]},
+sci(){return pick(T)[1]()}};
+const GEN={rdc:PROV.length*2+OLD.length*2,sci:T.reduce((s,t)=>s+t[0],0)};
+const cnt=id=>(B[id]||[]).length+(GEN[id]||0),know=()=>B.sci.length+EL.length*4+16;
+
+/* ===== 10 rubriques supplémentaires ===== */
+Object.assign(B,{
+cg:P(`Quel est le plus grand océan du monde ?|L’océan Pacifique
+Qui a peint la Joconde ?|Léonard de Vinci
+En quelle année l’homme a-t-il marché sur la Lune pour la première fois ?|1969
+Quel est le plus long fleuve d’Afrique ?|Le Nil
+Qui a écrit « Les Misérables » ?|Victor Hugo
+Quelle est la plus haute montagne du monde ?|L’Everest
+Quel est le plus grand désert chaud du monde ?|Le Sahara
+Qui a découvert l’Amérique en 1492 ?|Christophe Colomb
+Quel est le plus grand pays du monde par sa superficie ?|La Russie
+Quelle est la monnaie du Japon ?|Le yen
+Quelle organisation internationale a son siège à New York et réunit presque tous les pays ?|L’ONU
+Combien de jours compte une année bissextile ?|366
+Quelle fête célèbre-t-on le 1er mai dans de nombreux pays ?|La fête du Travail`),
+geo:P(`Quel fleuve est le plus puissant du monde par son débit ?|L’Amazone
+Quel est le plus petit pays du monde ?|Le Vatican
+Quel est le pays le plus peuplé d’Afrique ?|Le Nigéria
+Quel est le plus grand lac d’Afrique ?|Le lac Victoria
+Quel détroit sépare l’Europe de l’Afrique ?|Le détroit de Gibraltar
+Quelle est la plus longue chaîne de montagnes terrestres ?|Les Andes
+Quel est le point culminant de l’Afrique ?|Le Kilimandjaro
+Quel est le plus grand continent ?|L’Asie
+Quel désert de Namibie est réputé le plus ancien du monde ?|Le Namib
+Quel est le plus grand pays d’Afrique par sa superficie ?|L’Algérie
+Quelle mer sépare l’Afrique de l’Arabie ?|La mer Rouge
+Quel fleuve traverse Paris ?|La Seine
+Quel est le plus long fleuve d’Europe ?|La Volga
+Quelle est la plus grande île du monde ?|Le Groenland`),
+his:P(`En quelle année la Seconde Guerre mondiale a-t-elle pris fin ?|1945
+En quelle année la Première Guerre mondiale a-t-elle débuté ?|1914
+Qui fut le premier président des États-Unis ?|George Washington
+Quel empereur français fut vaincu à Waterloo en 1815 ?|Napoléon Ier
+En quelle année le mur de Berlin est-il tombé ?|1989
+Qui devint président de l’Afrique du Sud en 1994 ?|Nelson Mandela
+En quelle année les États-Unis ont-ils proclamé leur indépendance ?|1776
+Quelle ville romaine fut ensevelie par l’éruption du Vésuve en 79 ?|Pompéi
+Quel navigateur a atteint l’Inde par la mer en 1498 ?|Vasco de Gama
+Quelle bataille de 1896 a vu l’Éthiopie vaincre l’Italie ?|La bataille d’Adoua
+En quelle année l’esclavage a-t-il été aboli définitivement en France ?|1848
+Quel pays d’Afrique subsaharienne fut le premier indépendant, en 1957 ?|Le Ghana
+Quel roi de France était surnommé le Roi-Soleil ?|Louis XIV
+Quel fondateur de l’empire du Mali régna au XIIIe siècle ?|Soundiata Keïta
+Quel empereur du Mali est célèbre pour son pèlerinage à La Mecque en 1324 ?|Mansa Moussa
+Quel événement marque la fin de l’Empire romain d’Occident, en 476 ?|La déposition de Romulus Augustule`),
+dev:P(`Je suis plein de trous mais je retiens l’eau. Qui suis-je ?|Une éponge
+Plus on m’enlève, plus je deviens grand. Qui suis-je ?|Un trou
+Je parle sans bouche et j’entends sans oreilles. Qui suis-je ?|L’écho
+J’ai des villes sans maisons, des forêts sans arbres et de l’eau sans poissons. Qui suis-je ?|Une carte
+Qu’est-ce qui monte mais ne descend jamais ?|L’âge
+Plus je sèche, plus je suis mouillée. Qui suis-je ?|Une serviette
+J’ai des dents mais je ne mords pas. Qui suis-je ?|Un peigne
+Qu’est-ce qui voyage partout en restant dans son coin ?|Un timbre
+Plus il y en a, moins on voit. Qu’est-ce que c’est ?|L’obscurité
+J’ai des touches mais aucune porte à ouvrir. Qui suis-je ?|Un piano
+Je suis grande quand je suis jeune et petite quand je suis vieille. Qui suis-je ?|Une bougie
+Qu’est-ce qui court sans jamais marcher ?|Un fleuve`),
+spo:P(`Combien de joueurs une équipe de football aligne-t-elle sur le terrain ?|11
+Quel pays a remporté la Coupe du monde de football 2022 ?|L’Argentine
+Combien d’anneaux compte le drapeau olympique ?|5
+Quelle est la distance d’un marathon ?|42,195 km
+Combien de fois la RDC a-t-elle remporté la CAN ?|Deux fois (1968 et 1974)
+Quel combat de boxe historique a eu lieu à Kinshasa en 1974 ?|Le « Rumble in the Jungle » (Ali – Foreman)
+Quel est le pays d’origine du judo ?|Le Japon
+Combien de joueurs une équipe de basketball aligne-t-elle sur le terrain ?|5
+Dans quelle ville se sont tenus les Jeux olympiques d’été de 2024 ?|Paris
+Combien de joueurs une équipe de volleyball aligne-t-elle sur le terrain ?|6`),
+mus:P(`Combien de notes compte la gamme ?|Sept
+Quel instrument possède 88 touches ?|Le piano
+Quel compositeur a écrit la 9e symphonie avec « l’Ode à la joie » ?|Ludwig van Beethoven
+Quelle musique congolaise est inscrite au patrimoine culturel immatériel de l’UNESCO ?|La rumba congolaise
+Quel musicien congolais était surnommé « le Sorcier de la guitare » ?|Franco Luambo (TPOK Jazz)
+Quel chanteur congolais a enregistré « Marie-Louise » en 1948 ?|Wendo Kolosoy
+Qui a chanté « Indépendance Cha Cha » en 1960 ?|Joseph Kabasele, dit « Le Grand Kallé »
+Combien de cordes a une guitare classique ?|6
+Qui a composé « La Flûte enchantée » ?|Wolfgang Amadeus Mozart
+Quelle clé figure au début d’une portée pour les sons aigus ?|La clé de sol`),
+myt:P(`Qui est le roi des dieux dans la mythologie grecque ?|Zeus
+Quel dieu romain est associé à la guerre ?|Mars
+Quel dieu égyptien a une tête de chacal ?|Anubis
+Quel héros grec a accompli douze travaux ?|Héraclès (Hercule)
+Quelle déesse grecque incarne la sagesse ?|Athéna
+Quel dieu nordique manie le marteau et le tonnerre ?|Thor
+Quel monstre mi-homme mi-taureau vivait dans le labyrinthe de Crète ?|Le Minotaure
+Quel dieu grec règne sur les mers ?|Poséidon
+Quel titan a volé le feu aux dieux pour le donner aux hommes ?|Prométhée
+Comment s’appelle le cheval ailé de la mythologie grecque ?|Pégase
+Quel fleuve des Enfers les âmes devaient-elles traverser ?|Le Styx
+Qui est l’épouse de Zeus ?|Héra`),
+mat:P(`Quelle est la valeur approchée de π ?|3,14
+Quelle est la somme des angles d’un triangle ?|180°
+Quel est le seul nombre premier pair ?|2
+Combien de côtés a un hexagone ?|6
+Quel théorème relie les côtés d’un triangle rectangle ?|Le théorème de Pythagore`),
+fra:P(`Quel est le féminin de « acteur » ?|Actrice
+Quel est le pluriel de « cheval » ?|Chevaux
+Quel est le pluriel de « travail » ?|Travaux
+Quel est le contraire de « généreux » ?|Avare
+Conjugue « avoir » au passé simple, 3e personne du singulier.|Il eut
+Quel est le participe passé de « résoudre » ?|Résolu
+Quel auxiliaire emploie-t-on avec le verbe « aller » ?|Être
+Quelle est la nature du mot « rapidement » ?|Un adverbe
+Quelle figure de style : « Cette voiture est une fusée » ?|Une métaphore
+Complète : « Les enfants (manger, imparfait) ___ ».|mangeaient
+Quel est le féminin de « roi » ?|Reine
+Complète par a ou à : « Il ___ faim ».|a
+Qui a écrit « Le Petit Prince » ?|Antoine de Saint-Exupéry`)});
+B.cap=[];
+const CAP=`Algérie:Alger;Angola:Luanda;Bénin:Porto-Novo;Botswana:Gaborone;Burkina Faso:Ouagadougou;Burundi:Gitega;Cameroun:Yaoundé;Cap-Vert:Praia;Centrafrique:Bangui;Comores:Moroni;Congo-Brazzaville:Brazzaville;Côte d’Ivoire:Yamoussoukro;Djibouti:Djibouti;Égypte:Le Caire;Érythrée:Asmara;Eswatini:Mbabane;Éthiopie:Addis-Abeba;Gabon:Libreville;Gambie:Banjul;Ghana:Accra;Guinée:Conakry;Guinée-Bissau:Bissau;Guinée équatoriale:Malabo;Kenya:Nairobi;Lesotho:Maseru;Libéria:Monrovia;Libye:Tripoli;Madagascar:Antananarivo;Malawi:Lilongwe;Mali:Bamako;Maroc:Rabat;Maurice:Port-Louis;Mauritanie:Nouakchott;Mozambique:Maputo;Namibie:Windhoek;Niger:Niamey;Nigéria:Abuja;Ouganda:Kampala;Rwanda:Kigali;Sénégal:Dakar;Sierra Leone:Freetown;Somalie:Mogadiscio;Soudan:Khartoum;Soudan du Sud:Djouba;Afrique du Sud:Pretoria;Tanzanie:Dodoma;Tchad:N’Djamena;Togo:Lomé;Tunisie:Tunis;Zambie:Lusaka;Zimbabwe:Harare;France:Paris;Canada:Ottawa;Brésil:Brasilia;Australie:Canberra;Japon:Tokyo;Chine:Pékin;Inde:New Delhi;Allemagne:Berlin;Italie:Rome;Espagne:Madrid;Portugal:Lisbonne;Belgique:Bruxelles;Suisse:Berne;Russie:Moscou;Turquie:Ankara;Argentine:Buenos Aires;Mexique:Mexico;États-Unis:Washington D.C.;Royaume-Uni:Londres;Haïti:Port-au-Prince;Arabie saoudite:Riyad;Corée du Sud:Séoul;Pérou:Lima;Colombie:Bogota;Suède:Stockholm;Norvège:Oslo;Grèce:Athènes;Pologne:Varsovie`.split(";").map(s=>s.split(":"));
+const MT=[
+[7744,()=>{const a=ri(12,99),b=ri(12,99);return[`${a} + ${b} = ?`,String(a+b)]}],
+[79200,()=>{const a=ri(100,999),b=ri(12,99);return[`${a} − ${b} = ?`,String(a-b)]}],
+[459,()=>{const m=ri(3,19),n=ri(4,30);return[`${m} × ${n} = ?`,String(m*n)]}],
+[27,()=>{const n=ri(4,30);return[`${n}² = ?`,String(n*n)]}],
+[27,()=>{const n=ri(4,30);return[`√${n*n} = ?`,String(n)]}],
+[76,()=>{const p=pick([10,20,25,50]),N=ri(2,20)*20;return[`${p} % de ${N} = ?`,String(p*N/100)]}],
+[3360,()=>{const k=ri(2,9),x=ri(2,15),c=ri(1,30);return[`${k}x + ${c} = ${k*x+c}. Combien vaut x ?`,String(x)]}],
+[299,()=>{const L=ri(3,25),l=ri(2,L);return[`Quelle est l’aire d’un rectangle de ${L} cm sur ${l} cm ?`,`${L*l} cm²`]}],
+[299,()=>{const L=ri(3,25),l=ri(2,L);return[`Quel est le périmètre d’un rectangle de ${L} cm sur ${l} cm ?`,`${2*(L+l)} cm`]}],
+[11,()=>{const e=ri(4,14);return[`2^${e} = ?`,fmt(2**e)]}]];
+Object.assign(G,{
+cap(){const[p,c]=pick(CAP);return ri(0,1)?[`${p} : quelle est sa capitale ?`,c]:[`${c} est la capitale de quel pays ?`,p]},
+mat(){return pick(MT)[1]()}});
+Object.assign(GEN,{cap:CAP.length*2,mat:MT.reduce((s,t)=>s+t[0],0)});
+const total=()=>R.reduce((s,r)=>s+cnt(r[0]),0),auto=()=>Object.values(GEN).reduce((s,n)=>s+n,0);
+
+/* ===== État ===== */
+let custom=LS.g("ht_c",[]);custom.forEach(([r,q,a])=>(B[r]??=[]).push([q,a]));
+let st=LS.g("ht_s",{n:0,ok:0,best:0}),streak=0,S={},dp=null,swReady=false;
+const stand=matchMedia("(display-mode: standalone)").matches||navigator.standalone;
+
+function draw(r){const g=G[r],pool=B[r]||[];
+ for(let t=0;t<60;t++){let x=g&&(!pool.length||Math.random()<(r=="sci"||r=="mat"?.8:.5))?g():pick(pool);
+  if(x&&!S.seen.has(x[0])){S.seen.add(x[0]);return x}}
+ return pick(pool.length?pool:[["Question de secours : 1 + 1 = ?","2"]])}
+
+/* ===== Écrans ===== */
+function home(){clearInterval(S.tm);
+ app.innerHTML=`<h1>Herbogéniste Training<em>l’art de se préparer</em></h1>
+ <p class="lead">Entraîne-toi comme à Génie en herbe : une question, vingt secondes, puis la réponse. Tout fonctionne sans connexion.</p>
+ <div class="stats"><div><b>${st.n}</b><span>questions jouées</span></div><div><b>${st.n?Math.round(st.ok/st.n*100):0} %</b><span>de réussite</span></div><div><b>${st.best}</b><span>meilleure série</span></div></div>
+ <button class="btn" data-go="all">Défi mixte · 10 questions</button>
+ <h2>Choisis une rubrique</h2>
+ <ul class="toc">${R.map(([id,n,e])=>`<li><button data-go="${id}"><i>${e}</i><b>${n}</b><u>${fmt(cnt(id))}</u></button></li>`).join("")}</ul>
+ <p class="hint">${fmt(total())} questions au total, dont ${fmt(auto())} générées automatiquement (calculs, capitales, éléments chimiques, provinces). Ajoute les tiennes ci-dessous.</p>
+ <button class="btn s o" data-imp>＋ Ajouter mes questions</button><button class="btn s o" id="inst" hidden>📲 Installer l’app</button>
+ <p class="hint" id="ios" hidden>Sur iPhone ou iPad : touche « Partager », puis « Sur l’écran d’accueil ».</p>
+ <footer>Conçue et créée par <b>Josias Ezonga</b> (alias <b>NINJAXI</b>)<br>© 2026 Herbogéniste Training</footer>`;
+ syncInstall()}
+
+function start(r){S={r,i:0,ok:0,seen:new Set()};next()}
+function next(){clearInterval(S.tm);if(S.i>=10)return end();
+ S.rid=S.r=="all"?pick(R)[0]:S.r;S.q=draw(S.rid);S.i++;S.left=20;
+ app.innerHTML=`<div class="top"><button class="link" data-home>← Quitter</button><span>${RN[S.rid]} · ${S.i}/10</span></div>
+ <div class="bar"><i id="bar"></i></div>
+ <div class="board"><p class="q">${esc(S.q[0])}</p><div id="ans"></div></div><div id="act"><button class="btn" data-rev>Révéler la réponse</button></div>`;
+ S.tm=setInterval(()=>{S.left-=.1;const b=$("#bar");if(b)b.style.width=Math.max(0,S.left/20*100)+"%";if(S.left<=0)reveal()},100)}
+function reveal(){clearInterval(S.tm);if(!$("#ans")||$("#ans").innerHTML)return;
+ $("#ans").innerHTML=`<p class="a">${esc(S.q[1])}</p>`;
+ $("#act").innerHTML=`<p class="hint">Avais-tu la bonne réponse ?</p><div class="row"><button class="btn ko" data-g="0">✘ À revoir</button><button class="btn ok" data-g="1">✔ Je savais</button></div>`}
+function grade(g){st.n++;if(+g){S.ok++;st.ok++;streak++;st.best=Math.max(st.best,streak)}else streak=0;LS.s("ht_s",st);next()}
+function end(){const s=S.ok,t=["Apprenti curieux","Apprenti curieux","Apprenti curieux","Apprenti curieux","Esprit vif","Esprit vif","Esprit vif","Savant","Savant","Maître herbogéniste","Génie absolu"][s];
+ app.innerHTML=`<div class="top"><span></span><span>Séance terminée</span></div><div class="board" style="text-align:center"><p class="big">${s}/10</p><h2 style="margin-top:14px">${t}</h2></div>
+ <button class="btn" data-go="${S.r}">Rejouer cette séance</button><button class="btn o" data-home>Retour au sommaire</button>
+ <footer>Herbogéniste Training · par <b>Josias Ezonga</b> (NINJAXI)</footer>`}
+function imp(){app.innerHTML=`<div class="top"><button class="link" data-home>← Retour</button><span>Mes questions</span></div>
+ <p class="hint">Une question par ligne, au format <b>rubrique | question | réponse</b>. Rubriques : ${R.map(r=>r[0]).join(", ")}. Colle autant de lignes que tu veux : elles sont gardées sur cet appareil.</p>
+ <textarea id="ta" placeholder="sci | Quelle est la formule du sel de table ? | NaCl"></textarea><button class="btn" data-save>Enregistrer ces questions</button><p class="hint" id="msg">${custom.length} question(s) personnelle(s) enregistrée(s).</p>`}
+function save(){let n=0;$("#ta").value.split("\n").forEach(l=>{const[r,q,a]=l.split("|").map(s=>s.trim());if(RN[r]&&q&&a){custom.push([r,q,a]);(B[r]??=[]).push([q,a]);n++}});
+ LS.s("ht_c",custom);$("#msg").textContent=n+" question(s) ajoutée(s). Total personnel : "+custom.length+".";$("#ta").value=""}
+
+app.addEventListener("click",e=>{const t=e.target.closest("button");if(!t)return;const d=t.dataset;
+ if("go"in d)start(d.go);else if("home"in d)home();else if("rev"in d)reveal();else if("g"in d)grade(d.g);
+ else if("imp"in d)imp();else if("save"in d)save();else if(t.id=="inst"&&dp){dp.prompt();dp=null;t.hidden=true}});
+addEventListener("keydown",e=>{if(e.code=="Space"&&$("[data-rev]")){e.preventDefault();reveal()}});
+
+/* ===== Installation + hors ligne ===== */
+function syncInstall(){const i=$("#inst");if(!i||stand)return;if(dp)i.hidden=false;
+ if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&$("#ios"))$("#ios").hidden=false}
+addEventListener("beforeinstallprompt",e=>{e.preventDefault();dp=e;syncInstall()});
+addEventListener("appinstalled",()=>{dp=null;home()});
+function net(){const n=$("#net");n.textContent=(navigator.onLine?"● en ligne":"● hors ligne")+(swReady?" · prêt hors ligne ✓":"");n.className="pill"+(swReady?" on":"")}
+addEventListener("online",net);addEventListener("offline",net);
+if("serviceWorker"in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").then(()=>navigator.serviceWorker.ready).then(()=>{swReady=true;net()}).catch(()=>{}));
+net();home();
+</script></body></html>
